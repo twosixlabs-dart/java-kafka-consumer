@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df76f995-0ab5-4e6a-9266-6f5ad03d643e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/worldmodelers/kafka/consumer/ExampleConsumerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/test.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/worldmodelers/kafka/consumer/ExampleConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/worldmodelers/kafka/consumer/ExampleConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/worldmodelers/kafka/consumer/ExampleConsumerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/worldmodelers/kafka/consumer/ExampleConsumerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +106,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585061734154</updated>
-      <workItem from="1585061740058" duration="2439000" />
+      <workItem from="1585061740058" duration="8330000" />
     </task>
     <servers />
   </component>
