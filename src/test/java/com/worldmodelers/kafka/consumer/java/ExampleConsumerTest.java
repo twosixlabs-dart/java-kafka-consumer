@@ -1,8 +1,7 @@
-package com.worldmodelers.kafka.consumer;
+package com.worldmodelers.kafka.consumer.java;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.worldmodelers.kafka.messages.ExampleStreamMessage;
-import com.worldmodelers.kafka.messages.ExampleStreamMessageJsonFormat;
+import com.worldmodelers.kafka.messages.ExampleConsumerMessage;
+import com.worldmodelers.kafka.messages.ExampleConsumerMessageJsonFormat;
 import kafka.server.KafkaConfig$;
 import net.mguenther.kafka.junit.*;
 import org.junit.Rule;
@@ -20,7 +19,7 @@ import java.util.Properties;
 
 import static org.junit.Assert.*;
 
-public class ExampleConsumerTest extends ExampleStreamMessageJsonFormat {
+public class ExampleConsumerTest extends ExampleConsumerMessageJsonFormat {
 
     private final Logger LOG = LoggerFactory.getLogger( ExampleConsumerTest.class );
 
@@ -56,12 +55,12 @@ public class ExampleConsumerTest extends ExampleStreamMessageJsonFormat {
         new Thread( consumer::run ).start();
         Thread.sleep( 1000 );
 
-        ExampleStreamMessage message = new ExampleStreamMessage( "id1", breadcrumbs );
+        ExampleConsumerMessage message = new ExampleConsumerMessage( "id1", breadcrumbs );
         String messageJson = marshalMessage( message );
 
         List<KeyValue<String, String>> records = new ArrayList<>();
 
-        records.add( new KeyValue<>( message.id, messageJson ) );
+        records.add( new KeyValue<>( message.getId(), messageJson ) );
 
         SendKeyValues<String, String> sendRequest = SendKeyValues.to( topic, records ).useDefaults();
 
@@ -69,7 +68,7 @@ public class ExampleConsumerTest extends ExampleStreamMessageJsonFormat {
 
         Thread.sleep( 1000 );
 
-        String content = new String ( Files.readAllBytes( Paths.get( persistDir + "/" + message.id + ".txt" ) ) );
+        String content = new String ( Files.readAllBytes( Paths.get( persistDir + "/" + message.getId() + ".txt" ) ) );
 
         assertEquals( "id1\njava-kafka-streams, java-kafka-consumer", content );
     }

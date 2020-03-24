@@ -1,6 +1,6 @@
-package com.worldmodelers.kafka.consumer;
+package com.worldmodelers.kafka.consumer.java;
 
-import com.worldmodelers.kafka.messages.ExampleStreamMessage;
+import com.worldmodelers.kafka.messages.ExampleConsumerMessage;
 import com.worldmodelers.kafka.messages.serde.ExampleStreamMessageSerde;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Properties;
-import java.util.function.Consumer;
 
 public class ExampleConsumer {
 
@@ -24,7 +23,7 @@ public class ExampleConsumer {
     private String topic;
     private String persistDir;
 
-    protected KafkaConsumer<String, ExampleStreamMessage> consumer;
+    protected KafkaConsumer<String, ExampleConsumerMessage> consumer;
 
     public ExampleConsumer( String topicIn, String persistDirIn, Properties properties ) {
         properties.forEach( ( key, val ) -> {
@@ -35,7 +34,7 @@ public class ExampleConsumer {
 
         topic = topicIn;
         persistDir = persistDirIn;
-        consumer = new KafkaConsumer< String, ExampleStreamMessage >( kafkaProps );
+        consumer = new KafkaConsumer< String, ExampleConsumerMessage>( kafkaProps );
 
         ArrayList<String> topics = new ArrayList<>(  );
         topics.add( topic );
@@ -47,15 +46,15 @@ public class ExampleConsumer {
     // deserialize the message itself (in this case the custom ExampleStreamMessageSerde
     // defined in the messages package
     private Serde<String> stringSerdes = Serdes.String();
-    private Serde<ExampleStreamMessage> streamMessageSerdes = new ExampleStreamMessageSerde();
+    private Serde<ExampleConsumerMessage> streamMessageSerdes = new ExampleStreamMessageSerde();
 
     // This is the business logic of the consumer: it acts on the consumed message (in
     // this case it just adds itself to the breadcrumbs and writes it to the filesystem)
-    private void persist( ExampleStreamMessage message ) throws IOException {
-        ArrayList<String> breadcrumbs = message.breadcrumbs;
+    private void persist( ExampleConsumerMessage message ) throws IOException {
+        ArrayList<String> breadcrumbs = message.getBreadcrumbs();
         breadcrumbs.add( "java-kafka-consumer" );
-        String id = message.id;
-        String fileName = persistDir + "/" + message.id + ".txt";
+        String id = message.getId();
+        String fileName = persistDir + "/" + message.getId() + ".txt";
 
         LOG.info( "Persisting " + fileName );
 
@@ -76,7 +75,7 @@ public class ExampleConsumer {
 
         try {
             while ( true ) {
-                ConsumerRecords<String, ExampleStreamMessage> records = consumer.poll( Duration.ofMillis( timeout ) );
+                ConsumerRecords<String, ExampleConsumerMessage> records = consumer.poll( Duration.ofMillis( timeout ) );
                 records.forEach( record -> {
                     try {
                         persist( record.value() );
