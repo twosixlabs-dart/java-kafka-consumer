@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="df76f995-0ab5-4e6a-9266-6f5ad03d643e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1Za0880yQuo3HUBeXua7M0SXnZM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/worldmodelers/kafka" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../../cdr4s" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../cdr4s-elasticsearch-repository" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../cdr4s-hbase-repository" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../experiments/mosworks" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../fugazi" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../hot-snakes" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../scala-kafka-streams" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../libraries/cdr4s-apis" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../libraries/corpex-api" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../libraries/dart-commons" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../melt-banana" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../mindflayer" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../pipeline-services/corpex" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../pipeline-stages/black-dice" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../pipeline-stages/ladle" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../polvo" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../storage/daydream-nation" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../storage/kronos" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../storage/sonic-citadel" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../user-interface/corpex-ui" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="df76f995-0ab5-4e6a-9266-6f5ad03d643e" name="Default Changelist" comment="" />
+      <created>1585061734154</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585061734154</updated>
+      <workItem from="1585061740058" duration="618000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
