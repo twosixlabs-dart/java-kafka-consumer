@@ -1,0 +1,64 @@
+package com.worldmodelers.kafka.consumer;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.worldmodelers.kafka.messages.ExampleStreamMessage;
+import com.worldmodelers.kafka.messages.ExampleStreamMessageJsonFormat;
+import kafka.server.KafkaConfig$;
+import net.mguenther.kafka.junit.*;
+import org.junit.Rule;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import static org.junit.Assert.*;
+
+public class ExampleConsumerTest extends ExampleStreamMessageJsonFormat {
+
+    private final Logger LOG = LoggerFactory.getLogger( ExampleConsumerTest.class );
+
+    private EmbeddedKafkaConfig kafkaConfig = EmbeddedKafkaConfig
+            .create()
+            .with( KafkaConfig$.MODULE$.PortProp(), 6308 )
+            .build();
+
+    private EmbeddedKafkaClusterConfig kafkaClusterConfig = EmbeddedKafkaClusterConfig
+            .create()
+            .provisionWith( kafkaConfig )
+            .build();
+
+    private Properties properties = new Properties();
+
+    public ExampleConsumerTest() throws IOException {
+        InputStream propStream = getClass().getClassLoader().getResourceAsStream( "test.properties" );
+        properties.load( propStream );
+    }
+
+    @Rule
+    public EmbeddedKafkaCluster cluster = EmbeddedKafkaCluster.provisionWith( kafkaClusterConfig );
+
+    @Test
+    public void ExampleConsumerShouldReadAMessageFromATopic() throws JsonProcessingException, InterruptedException {
+        String topic = properties.getProperty( "topic.from" );
+        String persistDir = properties.getProperty( "consumer.persist.dir" );
+        ExampleConsumer consumer = new ExampleConsumer( topic, persistDir, properties );
+
+        ExampleStreamMessage streamMessage = new ExampleStreamMessage( "id1", new ArrayList<String>() );
+        String streamMessageJson = marshalMessage( streamMessage );
+
+        // consumer.run();
+
+        List<KeyValue<String, String>> records = new ArrayList<>();
+
+        records.add( new KeyValue<>( streamMessage.id, streamMessageJson ) );
+
+        SendKeyValues<String, String> sendRequest = SendKeyValues.to( topic, records ).useDefaults();
+
+        cluster.send( sendRequest );
+    }
+}
