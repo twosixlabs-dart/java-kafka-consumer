@@ -11,8 +11,15 @@ public class ConsumerApp {
 
     public static void main(String[] args) throws IOException {
 
+        String configName;
+
+        if (args.length > 0) configName = args[0];
+        else configName = "default";
+
+        String configResource = configName.trim() + ".properties";
+
         Properties properties = new Properties();
-        InputStream propsStream = Stream.Cons.class.getClassLoader().getResourceAsStream( "app.properties" );
+        InputStream propsStream = Stream.Cons.class.getClassLoader().getResourceAsStream( configResource );
         properties.load( propsStream );
 
         String topicFrom = properties.getProperty( "topic.from" );
