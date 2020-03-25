@@ -1,5 +1,13 @@
-FROM openjdk:8
+  FROM reynoldsm88/centos-jdk:latest
 
-COPY ./target/java-kafka-consumer-jar-with-dependencies.jar /opt/app/app.jar
+LABEL maintainer="john.hungerford@twosixlabs.com"
 
-ENTRYPOINT ["java", "-jar", "/opt/app/app.jar"]
+ENV JAVA_OPTS "-Xms512m -Xmx512m -XX:+UseConcMarkSweepGC"
+ENV PROGRAM_ARGS "compose"
+
+COPY ./target/java-kafka-consumer-jar-with-dependencies.jar /opt/app/pkg/
+COPY ./scripts/run.sh /opt/app/bin/
+
+RUN chmod -R 755 /opt/app
+
+ENTRYPOINT ["/opt/app/bin/run.sh"]
