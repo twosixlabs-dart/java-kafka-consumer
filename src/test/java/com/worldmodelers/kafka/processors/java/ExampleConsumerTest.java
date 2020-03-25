@@ -53,7 +53,7 @@ public class ExampleConsumerTest extends ExampleConsumerMessageJsonFormat {
         breadcrumbs.add( "java-kafka-streams" );
 
         new Thread( consumer::run ).start();
-        Thread.sleep( 1000 );
+        Thread.sleep( 2000 );
 
         ExampleConsumerMessage message = new ExampleConsumerMessage( "id1", breadcrumbs );
         String messageJson = marshalMessage( message );
@@ -66,7 +66,7 @@ public class ExampleConsumerTest extends ExampleConsumerMessageJsonFormat {
 
         cluster.send( sendRequest );
 
-        Thread.sleep( 1000 );
+        Thread.sleep( 2000 );
 
         String content = new String ( Files.readAllBytes( Paths.get( persistDir + "/" + message.getId() + ".txt" ) ) );
 
