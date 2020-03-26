@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class ExampleConsumer {
@@ -41,8 +42,8 @@ public class ExampleConsumer {
         consumer.subscribe( topics );
     }
 
-    // Serdes are objects that handle serializing and deserializing kafka messages
-    // one is needed to deserialize the key (simple string serde) and another to
+    // Serdes are objects that handle serializing and deserializing kafka messages.
+    // One is needed to deserialize the key (simple string serde) and another to
     // deserialize the message itself (in this case the custom ExampleStreamMessageSerde
     // defined in the messages package
     private Serde<String> stringSerdes = Serdes.String();
@@ -51,19 +52,15 @@ public class ExampleConsumer {
     // This is the business logic of the consumer: it acts on the consumed message (in
     // this case it just adds itself to the breadcrumbs and writes it to the filesystem)
     private void persist( ExampleConsumerMessage message ) throws IOException {
-        ArrayList<String> breadcrumbs = message.getBreadcrumbs();
-        breadcrumbs.add( "java-kafka-consumer" );
-        String id = message.getId();
+        message.getBreadcrumbs().add( "java-kafka-consumer" );
         String fileName = persistDir + "/" + message.getId() + ".txt";
-
-        LOG.info( "Persisting " + fileName );
 
         File file = new File( fileName );
         file.createNewFile();
 
         FileWriter fw = new FileWriter( fileName );
-        fw.write( id );
-        fw.append( "\n" + String.join(", ", breadcrumbs) );
+        fw.write( message.getId() );
+        fw.append( "\n" + String.join(", ", message.getBreadcrumbs()) );
         fw.close();
     }
 
@@ -80,7 +77,7 @@ public class ExampleConsumer {
                     try {
                         persist( record.value() );
                     } catch ( IOException e ) {
-                        LOG.error( "FAILED TO PERSIST RECORD" );
+                        LOG.error( e.getMessage() );
                         e.printStackTrace();
                     }
                 } );
