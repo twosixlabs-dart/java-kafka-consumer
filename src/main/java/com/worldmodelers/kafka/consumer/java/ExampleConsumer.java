@@ -1,4 +1,4 @@
-package com.worldmodelers.kafka.processors.java;
+package com.worldmodelers.kafka.consumer.java;
 
 import com.worldmodelers.kafka.messages.ExampleConsumerMessage;
 import com.worldmodelers.kafka.messages.serde.ExampleStreamMessageSerde;

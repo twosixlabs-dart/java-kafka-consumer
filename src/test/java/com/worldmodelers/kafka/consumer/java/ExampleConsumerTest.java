@@ -1,4 +1,4 @@
-package com.worldmodelers.kafka.processors.java;
+package com.worldmodelers.kafka.consumer.java;
 
 import com.worldmodelers.kafka.messages.ExampleConsumerMessage;
 import com.worldmodelers.kafka.messages.ExampleConsumerMessageJsonFormat;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ExampleConsumerTest extends ExampleConsumerMessageJsonFormat {
 
