@@ -12,9 +12,21 @@ See the `.properties` files in the resource directories to see what properties n
 kafka (the kafka-specific properties are prefixed by `kafka.*`, which prefix is stripped when they
 are passed to the streams builder).
 
-## SASL Configuration
-See the `compose-secure.properties` which includes kakfka configuration that enables 
-SASL (Simple Authentication And Security layer) authentication with SSL encryption.
+## SASL / SSL Configuration
+See the `compose-secure.properties` which includes kafka configuration that enables 
+SASL (Simple Authentication And Security layer) authentication with SSL encryption.  
+
+For kafka client to be able to connect to kafka topic via SSL and successfully perform hostname verification 
+the `kafka.bootstrap.servers` hostname has to match the hostname that is set in the `Common Name (CN)` field 
+or `dnsName` in `subjectAltName` field of the SSL certificate presented by the kafka broker.  
+Wildcard can be used in the CN / dnsName (*.example.com).  
+
+In case when kafka broker responds with self signed certificate the truststore location and password can be defined
+using `kafka` properties.
+```
+kafka.ssl.truststore.location=client.truststore.jks // full path to the trustore which includes the self signed certificate
+kafka.ssl.truststore.password=trustStorePassword
+``` 
 
 ## Running the Example
 
