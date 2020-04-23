@@ -3,14 +3,18 @@
 To understand this project, read through `com.worldmodelers.kafka.processors.java.ExampleConsumer`. 
 This class is where the stream processor is constructed; comments are provided to explain how it works.
 
-For more information on using Kafka, you can find the slides from our original presentation here:
-https://drive.google.com/open?id=1h1tC4oOEQfhwehvIxfY92VeMmkF5EUb_
+For more information on using Kafka, you can find documentation here:
+https://kafka.apache.org/documentation/
 
 ## Configuration
 
 See the `.properties` files in the resource directories to see what properties need to be passed to
 kafka (the kafka-specific properties are prefixed by `kafka.*`, which prefix is stripped when they
 are passed to the streams builder).
+
+## SASL Configuration
+See the `compose-secure.properties` which includes kakfka configuration that enables 
+SASL (Simple Authentication And Security layer) authentication with SSL encryption.
 
 ## Running the Example
 
