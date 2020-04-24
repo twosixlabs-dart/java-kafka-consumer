@@ -1,13 +1,9 @@
 package com.worldmodelers.kafka.consumer.java;
 
-import com.worldmodelers.kafka.messages.ExampleConsumerMessage;
-import com.worldmodelers.kafka.messages.ExampleConsumerMessageJsonFormat;
 import kafka.server.KafkaConfig$;
 import net.mguenther.kafka.junit.*;
 import org.junit.Rule;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,12 +12,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 
-public class ExampleConsumerTest extends ExampleConsumerMessageJsonFormat {
-
-    private final Logger LOG = LoggerFactory.getLogger( ExampleConsumerTest.class );
+public class ExampleConsumerTest {
 
     private EmbeddedKafkaConfig kafkaConfig = EmbeddedKafkaConfig
             .create()
@@ -49,18 +44,15 @@ public class ExampleConsumerTest extends ExampleConsumerMessageJsonFormat {
         String persistDir = properties.getProperty( "consumer.persist.dir" );
         ExampleConsumer consumer = new ExampleConsumer( topic, persistDir, properties );
 
-        ArrayList<String> breadcrumbs = new ArrayList<String>();
-        breadcrumbs.add( "java-kafka-streams" );
-
         new Thread( consumer::run ).start();
         Thread.sleep( 2000 );
 
-        ExampleConsumerMessage message = new ExampleConsumerMessage( "id1", breadcrumbs );
-        String messageJson = marshalMessage( message );
-
         List<KeyValue<String, String>> records = new ArrayList<>();
 
-        records.add( new KeyValue<>( message.getId(), messageJson ) );
+        String id = UUID.randomUUID().toString();
+        String message = "my test message";
+
+        records.add( new KeyValue<>( id, message ) );
 
         SendKeyValues<String, String> sendRequest = SendKeyValues.to( topic, records ).useDefaults();
 
@@ -68,8 +60,8 @@ public class ExampleConsumerTest extends ExampleConsumerMessageJsonFormat {
 
         Thread.sleep( 2000 );
 
-        String content = new String ( Files.readAllBytes( Paths.get( persistDir + "/" + message.getId() + ".txt" ) ) );
+        String content = new String( Files.readAllBytes( Paths.get( persistDir + "/" + id + ".txt" ) ) );
 
-        assertEquals( "id1\njava-kafka-streams, java-kafka-consumer", content );
+        assertEquals( content, message );
     }
 }
